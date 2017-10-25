@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "hiking app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/breese8009/hikingApp.git"
+  },
+  "author": "Bryan Reese",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/breese8009/hikingApp/issues"
+  },
+  "homepage": "https://github.com/breese8009/hikingApp#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.4"
+  }
+}
