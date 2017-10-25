@@ -2,7 +2,7 @@ require('dotenv').config();
 
 var express = require('express');
 var app = express();
-var redditRouter = require('./config/routes.js');
+var hikerRouter = require('./config/routes.js');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-app.use(redditRouter);
+app.use(hikerRouter);
 
 let port = process.env.PORT || 3000;
 
