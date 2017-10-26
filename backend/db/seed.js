@@ -5,7 +5,7 @@ let users ={
 	email: "reese",
 	password: "1234",
 	location: "sf Ca",
-	profilePic: "none",
+	profilePic: "https://s3.amazonaws.com/37assets/svn/1065-IMG_2529.jpg",
 	hikingSpots: []
 }
 	

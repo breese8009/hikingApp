@@ -8,5 +8,8 @@
     "start": "nodemon server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "passport-http": "^0.3.0"
+  }
 }

@@ -5,8 +5,8 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-
-
+import { Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Image } from 'react-bootstrap'
+import './User.css'
 
 class User extends Component {
 
@@ -36,17 +36,27 @@ class User extends Component {
 
 
 
+
   render() {
- let show = this.state.usersData.map(({name}, index)=>{
+ let show = this.state.usersData.map(({name, profilePic}, index)=>{
     return  <div class="container" key={index}>
-      <h1>{name}</h1>
+    <Col sm={6}>
+     <Image className="profilePic" src={profilePic} circle />
+     </Col>
+      <Col sm={6}>
+      <h1>Hello, {name}</h1>
+      </Col>
 </div>
 
   })
 
   return (
   <div>
- {show}
+    {show}
+
+     
+    
+    
   </div>
 
 
