@@ -5,9 +5,41 @@
     }
 
     .carousel {
-    	margin-bottom: 100px;
+        width:100vw;
+        margin:0 auto;
     }
 
-    .modal-inputs {
-    	padding:20px;
+    .carousel img {
+        width:100vw;
     }
+
+    .create-form {
+        width:40vw;
+        height:auto;
+       text-align: center;
+       margin:0 auto;
+       position:relative;
+       border:2px black solid;
+       margin-top:100px;
+       background-color: white;
+       margin-bottom:100px;
+     border-radius: 44px;
+    }
+
+    .loginBtn {
+      margin-top:10px;
+      width:100%;
+    }
+
+    .login-page {
+      background-color: black;
+    }
+
+    .loginInput {
+      padding:10px;
+      height:50px;
+      margin-top:10px;
+
+    }
+
+   

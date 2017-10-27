@@ -10,6 +10,7 @@ import {
   Link
 } from 'react-router-dom';
 
+
 class App extends Component {
   render() {
 
@@ -20,6 +21,7 @@ class App extends Component {
           <div>
          <Route path="/home" component={Login} />
          <Route path="/profile" component={User} />
+    
           </div>
        </Router>
         

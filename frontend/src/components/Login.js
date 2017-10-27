@@ -6,7 +6,10 @@ import {
   Link
 } from 'react-router-dom';
 import './Login.css'
-import { Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Carousel, Modal } from 'react-bootstrap'
+import {Carousel, Form, FormControl, Button} from 'react-bootstrap'
+import CreateUser from './CreateUser'
+
+
 
 
 class Login extends Component {
@@ -26,9 +29,9 @@ class Login extends Component {
 
   onInputChange(event){
     console.log(event.target.value)
-    this.setState({
-      usersData: event.target.value
-    })
+    // this.setState({
+    //   usersData: event.target.value
+    // })
   }
 
   onFormSubmit(event){
@@ -38,17 +41,14 @@ class Login extends Component {
   }
 
 
-  getInitialState() {
-    return { show: false };
-  }
-
 
 
 
   render() {
-    let close = () => this.setState({ show: false });
+    
   return (
-    <div class="container">
+    
+<div className="login-page">
 
  <Carousel className="carousel">
     <Carousel.Item>
@@ -77,142 +77,36 @@ class Login extends Component {
 
 
   <div class="create-form">
+<h1>Login</h1>
 
-  <Form onSubmit={event => this.onFormSubmit(event)}>
-    <FormGroup controlId="formHorizontalEmail">
-      <Col componentClass={ControlLabel} sm={2}>
-        Email
-      </Col>
-      <Col sm={10}>
-        <FormControl type="email" placeholder="Email" onChange={event => this.onInputChange(event)}/>
-      </Col>
-    </FormGroup>
+<Form>
 
-    <FormGroup controlId="formHorizontalPassword">
-      <Col componentClass={ControlLabel} sm={2}>
-        Password
-      </Col>
-      <Col sm={10}>
-        <FormControl type="password" placeholder="Password" onChange={event => this.onInputChange(event)}/>
-      </Col>
-    </FormGroup>
+<FormControl
+onChange={event => this.onInputChange(event)}
+className="loginInput"
+placeholder="email"
+type="email"
+>
+</FormControl>
 
-    <FormGroup>
-      <Col smOffset={2} sm={10}>
-        <Checkbox>Remember me</Checkbox>
-      </Col>
-    </FormGroup>
+<FormControl
+onChange={event => this.onInputChange(event)}
+className="loginInput"
+placeholder="password"
+type="password"
+>
+</FormControl>
 
-    <FormGroup>
 
-      <Col smOffset={2} sm={10}>
-       <p>Not a memeber? Click create</p>
-        <Button type="submit">
-          Sign in
-        </Button>
-
-          <Button
-         
-          onClick={() => this.setState({ show: true })}
-        >
-          Create 
-        </Button>
-      </Col>
-    </FormGroup>
-  </Form>
-
+</Form>
+<Button 
+className="loginBtn"
+type="submit"
+bsStyle="primary"
+bsSize="large"
+>Login</Button>
+<p>Don't have an account? Create one here</p>
   </div>
-
-
-
-
-  <div className="modal-container" style={{ height: 200 }}>
-      
-
-        <Modal
-          show={this.state.show}
-          onHide={close}
-          container={this}
-          aria-labelledby="contained-modal-title"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title">Contained Modal</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-
-          <Form onSubmit={event => this.onFormSubmit(event)}>
-    <FormGroup controlId="formHorizontalEmail">
-      <FormGroup controlId="formHorizontalEmail">
-      <Col componentClass={ControlLabel} sm={2}>
-       Name
-      </Col>
-      <Col sm={10}>
-        <FormControl type="email" placeholder="Name" onChange={event => this.onInputChange(event)}/>
-      </Col>
-    </FormGroup>
-
-      <Col componentClass={ControlLabel} sm={2}>
-        Email
-      </Col>
-      <Col sm={10}>
-        <FormControl type="email" placeholder="Email" onChange={event => this.onInputChange(event)}/>
-      </Col>
-    </FormGroup>
-
-    <FormGroup controlId="formHorizontalPassword">
-      <Col componentClass={ControlLabel} sm={2}>
-        Password
-      </Col>
-      <Col sm={10}>
-        <FormControl type="password" placeholder="Password" onChange={event => this.onInputChange(event)}/>
-      </Col>
-    </FormGroup>
-
- <FormGroup>
-      <Col componentClass={ControlLabel} sm={2}>
-       Location
-      </Col>
-      <Col sm={10}>
-        <FormControl type="text" placeholder="Location" onChange={event => this.onInputChange(event)}/>
-      </Col>
-    </FormGroup>
-
-
-     <FormGroup>
-      <Col componentClass={ControlLabel} sm={2}>
-        Picture
-      </Col>
-      <Col sm={10}>
-        <FormControl type="text" placeholder="Picture URL" onChange={event => this.onInputChange(event)}/>
-      </Col>
-    </FormGroup>
-
-
-
-
-   
-
-    <FormGroup>
-
-      <Col smOffset={2} sm={10}>
-
-      </Col>
-    </FormGroup>
-  </Form>
-           
-          </Modal.Body>
-          <Modal.Footer>
-          <Button type="submit">
-          Create account
-        </Button>
-
-            <Button onClick={close}>Close</Button>
-
-          </Modal.Footer>
-        </Modal>
-      </div>
-
-
   </div>
 
   );

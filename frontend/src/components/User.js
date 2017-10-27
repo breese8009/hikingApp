@@ -5,8 +5,9 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import { Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Image } from 'react-bootstrap'
+import { ResponsiveEmbed, Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Image } from 'react-bootstrap'
 import './User.css'
+
 
 class User extends Component {
 
@@ -44,7 +45,7 @@ class User extends Component {
      <Image className="profilePic" src={profilePic} circle />
      </Col>
       <Col sm={6}>
-      <h1>Hello, {name}</h1>
+      <h1 className="nameDisplay">Hello, {name.slice(0,1).toUpperCase() + name.slice(1).toLowerCase()}</h1>
       </Col>
 </div>
 
@@ -52,11 +53,10 @@ class User extends Component {
 
   return (
   <div>
-    {show}
-
-     
-    
-    
+  <div className="profileHeader">
+  <Image className="profileHeaderPic" src="https://www.w3schools.com/w3css/img_forest.jpg" responsive />
+    <h1>{show}</h1>
+    </div>
   </div>
 
 
