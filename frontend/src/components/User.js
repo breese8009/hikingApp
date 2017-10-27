@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { ResponsiveEmbed, Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Image } from 'react-bootstrap'
 import './User.css'
-
+import GoogleApi from './GoogleApi';
 
 class User extends Component {
 
@@ -57,6 +57,7 @@ class User extends Component {
   <Image className="profileHeaderPic" src="https://www.w3schools.com/w3css/img_forest.jpg" responsive />
     <h1>{show}</h1>
     </div>
+    <GoogleApi/>
   </div>
 
 

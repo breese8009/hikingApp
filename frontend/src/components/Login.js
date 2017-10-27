@@ -8,7 +8,7 @@ import {
 import './Login.css'
 import {Carousel, Form, FormControl, Button} from 'react-bootstrap'
 import CreateUser from './CreateUser'
-
+import Navbar from './Navbar'
 
 
 
@@ -49,6 +49,8 @@ class Login extends Component {
   return (
     
 <div className="login-page">
+
+ <Navbar/>
 
  <Carousel className="carousel">
     <Carousel.Item>
@@ -105,7 +107,7 @@ type="submit"
 bsStyle="primary"
 bsSize="large"
 >Login</Button>
-<p>Don't have an account? Create one here</p>
+<p>Don't have an account?<CreateUser/></p>
   </div>
   </div>
 

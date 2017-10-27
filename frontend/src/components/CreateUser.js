@@ -14,9 +14,17 @@ class CreateUser extends Component {
 
     super();
 
+
    this.state = {
-     usersData:[]
+     name: '',
+     email: '',
+     password: '',
+     location: '',
+     profilePic:''
+
     }
+
+    this.onFormSubmit = this.onFormSubmit.bind(this)
 
   }
 
@@ -25,15 +33,51 @@ class CreateUser extends Component {
   }
 
 
+   onInputChange(event, field){
+    
+        this.setState({
+           [field]: event.target.value,
+        }, () => {
+          console.log(this.state);
+        })
+  }
+
+
+
+  onFormSubmit(event){
+    event.preventDefault()
+   console.log(this.state.name)
+
+   axios({
+    method: 'post',
+    url: 'http://localhost:8080/api/user',
+    data:{
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      location: this.state.location,
+      profilePic: this.state.profilePic
+
+    }
+   })
+
+
+   
+  }
+
+
   render() {
     let close = () => this.setState({ show: false });
   return (
      <span>
+     
         <span className="modal-container" style={{ height: 200 }}>
         <Button
+          bsStyle="info"
+          bsSize="small"
           onClick={() => this.setState({ show: true })}
         >
-          Create
+          Create 
         </Button>
 
         <Modal
@@ -42,46 +86,70 @@ class CreateUser extends Component {
           container={this}
           aria-labelledby="contained-modal-title"
         >
+        <Form onSubmit={event => this.onFormSubmit(event)}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title">Register New Account</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form>
- <FormGroup controlId="formValidationError1">
+
+          
+            
+ <FormGroup 
+ controlId="formValidationError1"
+ >
       <ControlLabel>Name</ControlLabel>
-      <FormControl type="text" />
+      <FormControl 
+      type="text" 
+      onChange={event => this.onInputChange(event, 'name')}
+      />
     </FormGroup>
 
     <FormGroup>
       <ControlLabel>Email</ControlLabel>
-      <FormControl type="email" />
+      <FormControl 
+      type="email" 
+      onChange={event => this.onInputChange(event, 'email')}
+      />
     </FormGroup>
 
     <FormGroup>
       <ControlLabel>Password</ControlLabel>
-      <FormControl type="password" />
+      <FormControl 
+      type="password" 
+      onChange={event => this.onInputChange(event, 'password')}
+      />
     </FormGroup>
 
        <FormGroup>
       <ControlLabel>Location</ControlLabel>
-      <FormControl type="text" />
+      <FormControl 
+      type="text" 
+      onChange={event => this.onInputChange(event, 'location')}
+      />
     </FormGroup>
 
        <FormGroup>
       <ControlLabel>Profile picture</ControlLabel>
-      <FormControl type="text" />
+      <FormControl 
+      type="text" 
+      onChange={event => this.onInputChange(event, 'profilePic')}
+      />
     </FormGroup>
-
-  </form>
           </Modal.Body>
           <Modal.Footer>
-          <Button type="submit">
+          <Button 
+          type="submit"
+          onClick={() => this.setState({ show: false })}
+          >
       Submit
     </Button>
             <Button onClick={close}>Close</Button>
           </Modal.Footer>
+            </Form>
         </Modal>
+
       </span>
+       
       </span>
     ); 
 }
