@@ -1,6 +1,7 @@
 var models = require('../models');
 var User = models.User;
 
+
 function index(req, res) {
   User.find({}, function(err, users) {
     if (err) res.send(err);
@@ -35,12 +36,13 @@ function update(req, res) {
     if (err) {
       res.sendStatus(404);
     }
-
-    foundUser.name = req.body.name;
-    foundUser.email = req.body.email;
-    foundUser.password = req.body.password;
-    foundUser.profilePic = req.body.profilePic;
-    foundUser.hikingSpots = req.body.hikingSpots;
+    let user = req.body.user
+    foundUser.name = user.name;
+    foundUser.email = user.email;
+    foundUser.password = user.password;
+    foundUser.profilePic = user.profilePic;
+    foundUser.location = user.location;
+    foundUser.hikingSpots = user.hikingSpots;
 
    foundUser.save(function(err, savedUser) {
       if (err) {

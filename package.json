@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "google-maps-react": "^1.1.0",
-    "passport-http": "^0.3.0",
     "prop-types": "^15.6.0"
   }
 }

@@ -16,15 +16,13 @@ class App extends Component {
 
     return (
       <div className="App">
-        
            <Router>
           <div>
          <Route path="/home" component={Login} />
          <Route path="/profile" component={User} />
-    
+
           </div>
        </Router>
-        
       </div>
     );
   }

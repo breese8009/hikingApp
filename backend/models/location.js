@@ -6,8 +6,8 @@ var LocationSchema = new Schema({
 	near_address: String,
 	description: String,
 	photo: String,
-	coordinates: String,
-	user_id: String
+	long: String,
+	lat: String
 });
 
 var Location = mongoose.model('Location', LocationSchema);

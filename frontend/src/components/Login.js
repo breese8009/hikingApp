@@ -19,7 +19,8 @@ class Login extends Component {
     super();
 
     this.state = {
-     usersData:[]
+      email: "",
+      password: ""
     }
 
     this.onFormSubmit = this.onFormSubmit.bind(this)
@@ -27,17 +28,27 @@ class Login extends Component {
   }
 
 
-  onInputChange(event){
+  onInputChange(event, field){
     console.log(event.target.value)
-    // this.setState({
-    //   usersData: event.target.value
-    // })
+    this.setState({
+     [field]: event.target.value,
+     [field]: event.target.value
+    })
+    console.log(this.state)
   }
+
 
   onFormSubmit(event){
     event.preventDefault()
    console.log(this.state)
-   
+
+   axios.get('/login')
+   .then((response)=>{
+    console.log(response)
+   })
+   .catch((error)=>{
+    console.log(error)
+   })
   }
 
 
@@ -81,10 +92,10 @@ class Login extends Component {
   <div class="create-form">
 <h1>Login</h1>
 
-<Form>
+<Form action="/login" method="post" onSubmit={event => this.onFormSubmit(event)}>
 
 <FormControl
-onChange={event => this.onInputChange(event)}
+onChange={event => this.onInputChange(event, "email")}
 className="loginInput"
 placeholder="email"
 type="email"
@@ -92,7 +103,7 @@ type="email"
 </FormControl>
 
 <FormControl
-onChange={event => this.onInputChange(event)}
+onChange={event => this.onInputChange(event, "password")}
 className="loginInput"
 placeholder="password"
 type="password"
@@ -100,13 +111,14 @@ type="password"
 </FormControl>
 
 
-</Form>
+
 <Button 
 className="loginBtn"
 type="submit"
 bsStyle="primary"
 bsSize="large"
 >Login</Button>
+</Form>
 <p>Don't have an account?<CreateUser/></p>
   </div>
   </div>
