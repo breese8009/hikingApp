@@ -1,5 +1,6 @@
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
 let Location = require('./location')
 
 var UserSchema = new Schema({

@@ -62,7 +62,7 @@ passport.use(new LocalStrategy({
 //user routes
 router.post('/api/user', userController.create);
 router.get('/api/user', userController.index);
-router.get('/api/user/:users_id',passport.authenticate('local', { session: false }), userController.show);
+router.get('/api/user/:users_id', userController.show);
 router.put('/api/user/:users_id',userController.update);
 
 router.delete('/api/user/:users_id', userController.destroy);
