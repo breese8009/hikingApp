@@ -4,7 +4,7 @@ var userController = require('../controllers/user');
 var locationController = require('../controllers/location');
 
 var passport = require('passport');
-// var Strategy = require('passport-http').BasicStrategy;
+var Strategy = require('passport-http').BasicStrategy;
 var LocalStrategy = require('passport-local').Strategy;
 var models = require('../models');
 var User = models.User;
@@ -21,40 +21,24 @@ var User = models.User;
 // after authentication.
 
 
-// passport.use(new Strategy({ qop: 'auth' },
-//   function(email, callback) {
- 
-//     User.findUserByEmail(email, function(user) {
-//         	console.log(user, "user HERE")
-//       if (!user) return callback(null, false); 
-//         return callback(null, user, user.password)
-//     })
-//   } 
-// ))
-
-
-
-passport.use(new LocalStrategy({
-	email: "email",
-	password: "password"
-},
+passport.use(new Strategy({ qop: 'auth' },
   function(email, password, done) {
-  	console.log(email)
-    User.findOne({ email: email }, function(err, user) {
+      User.findOne({ email: email }, function(err, user) {
 
       if (err) { 
-      	return done(err); 
+        return done(err); 
       }
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!user.validPassword(password)) {
+      if (user.password !== password) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
     });
-  }
-));
+  } 
+))
+// http://localhost:8080/api/user/59f6824c42cdb69de3e1140d
 
 // passport.authenticate('basic', { session: false })
 
@@ -62,8 +46,8 @@ passport.use(new LocalStrategy({
 //user routes
 router.post('/api/user', userController.create);
 router.get('/api/user', userController.index);
-router.get('/api/user/:users_id',passport.authenticate('basic', { session: false }), userController.show);
-router.put('/api/user/:users_id',userController.update);
+router.get('/api/user/:users_id', userController.show);
+router.put('/api/user/:users_id', userController.update);
 
 router.delete('/api/user/:users_id', userController.destroy);
 
