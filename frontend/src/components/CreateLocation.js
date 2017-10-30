@@ -1,15 +1,28 @@
-  import React, { Component } from 'react';
+  //   componentDidMount(){
+
+  //   axios.post(`http://localhost:8080/api/user/${params.users_id}/location`)
+  //   .then((data) => {
+  //    console.log(data)
+  //   })
+  //   .catch((error)=>{
+  //     console.log(error)
+  //   })
+
+  // }
+
+
+
+import React, { Component } from 'react';
 import axios from 'axios';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
-  Redirect
+  Link
 } from 'react-router-dom';
 import {FieldGroup, Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Carousel, Modal, Popover, Tooltip } from 'react-bootstrap'
 
 
-class CreateUser extends Component {
+class CreateLocation extends Component {
 
   constructor(){
 
@@ -17,15 +30,16 @@ class CreateUser extends Component {
 
 
    this.state = {
-     name: '',
-     email: '',
-     password: '',
-     location: '',
-     profilePic:''
+    city: "",
+	near_address: "",
+	description: "",
+	photo: "",
+	long: "",
+	lat: ""
 
     }
 
-    this.onFormSubmit = this.onFormSubmit.bind(this)
+    // this.onFormSubmit = this.onFormSubmit.bind(this)
 
   }
 
@@ -35,7 +49,6 @@ class CreateUser extends Component {
 
 
    onInputChange(event, field){
-    
         this.setState({
            [field]: event.target.value,
         }, () => {
@@ -51,15 +64,22 @@ class CreateUser extends Component {
 
    axios({
     method: 'post',
-    url: 'http://localhost:8080/api/user',
+    url: 'http://localhost:8080/api/user/:${params.user_id}/location',
     data:{
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      location: this.state.location,
-      profilePic: this.state.profilePic
-
+      city: this.state.city,
+      near_address: this.state.near_address,
+      description: this.state.description,
+      photo: this.state.photo,
+      long: this.state.long,
+      lat: this.state.lat
     }
+   })
+
+   .then((data)=>{
+   	console.log(data)
+   })
+   .catch((error)=>{
+   	console.log("did not work", error)
    })
 
 
@@ -70,6 +90,7 @@ class CreateUser extends Component {
   render() {
     let close = () => this.setState({ show: false });
   return (
+
      <span>
      
         <span className="modal-container" style={{ height: 200 }}>
@@ -78,16 +99,16 @@ class CreateUser extends Component {
           bsSize="small"
           onClick={() => this.setState({ show: true })}
         >
-          Create 
+          Add location
         </Button>
-
+ <Form onSubmit={event => this.onFormSubmit(event)}>
         <Modal
           show={this.state.show}
           onHide={close}
           container={this}
           aria-labelledby="contained-modal-title"
         >
-        <Form onSubmit={event => this.onFormSubmit(event)}>
+       
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title">Register New Account</Modal.Title>
           </Modal.Header>
@@ -95,47 +116,61 @@ class CreateUser extends Component {
 
           
             
- <FormGroup 
+
+     <FormGroup 
  controlId="formValidationError1"
  >
-      <ControlLabel>Name</ControlLabel>
+      <ControlLabel>city</ControlLabel>
       <FormControl 
       type="text" 
-      onChange={event => this.onInputChange(event, 'name')}
+      onChange={event => this.onInputChange(event, 'city')}
+      />
+    </FormGroup>
+
+
+
+    <FormGroup>
+      <ControlLabel>near address</ControlLabel>
+      <FormControl 
+      type="address" 
+      onChange={event => this.onInputChange(event, 'near_address')}
       />
     </FormGroup>
 
     <FormGroup>
-      <ControlLabel>Email</ControlLabel>
+      <ControlLabel>photo</ControlLabel>
       <FormControl 
-      type="email" 
-      onChange={event => this.onInputChange(event, 'email')}
-      />
-    </FormGroup>
-
-    <FormGroup>
-      <ControlLabel>Password</ControlLabel>
-      <FormControl 
-      type="password" 
-      onChange={event => this.onInputChange(event, 'password')}
+      type="text" 
+      onChange={event => this.onInputChange(event, 'photo')}
       />
     </FormGroup>
 
        <FormGroup>
-      <ControlLabel>Location</ControlLabel>
+      <ControlLabel>Long</ControlLabel>
       <FormControl 
       type="text" 
-      onChange={event => this.onInputChange(event, 'location')}
+      onChange={event => this.onInputChange(event, 'long')}
       />
     </FormGroup>
 
        <FormGroup>
-      <ControlLabel>Profile picture</ControlLabel>
+      <ControlLabel>Lat</ControlLabel>
       <FormControl 
       type="text" 
-      onChange={event => this.onInputChange(event, 'profilePic')}
+      onChange={event => this.onInputChange(event, 'lat')}
       />
     </FormGroup>
+
+
+     <FormGroup>
+      <ControlLabel>description</ControlLabel>
+      <FormControl 
+      type="text" 
+      onChange={event => this.onInputChange(event, 'description')}
+      />
+    </FormGroup>
+         
+     
           </Modal.Body>
           <Modal.Footer>
           <Button 
@@ -144,19 +179,23 @@ class CreateUser extends Component {
           >
       Submit
     </Button>
-            <Button 
-            onClick={close}
-            >Close</Button>
+            <Button onClick={close}>Close</Button>
           </Modal.Footer>
-            </Form>
+          
         </Modal>
-
+  </Form>
       </span>
        
       </span>
+
+
+
+       
+         
+     
     ); 
 }
 }
 
-export default CreateUser;
+export default CreateLocation;
 

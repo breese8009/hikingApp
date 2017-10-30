@@ -19,7 +19,7 @@ class App extends Component {
            <Router>
           <div>
          <Route path="/home" component={Login} />
-         <Route path="/profile" component={User} />
+         <Route path="/user/:user_id" component={User} />
 
           </div>
        </Router>

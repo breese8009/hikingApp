@@ -3,12 +3,14 @@ import axios from 'axios';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom';
 import { ResponsiveEmbed, Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Image, Thumbnail, Grid, Row } from 'react-bootstrap'
 import './User.css'
 import SimpleMap from './GoogleApi';
-
+import CreateLocation from './CreateLocation';
+import CreateUser from './CreateUser';
 class User extends Component {
 
   constructor(){
@@ -16,18 +18,25 @@ class User extends Component {
     super();
 
     this.state = {
-     usersData:[]
+  name: "",
+  email: "",
+  location: "",
+  profilePic: ""
     }
 
   }
-  componentDidMount(){
 
-    axios.get("http://localhost:8080/api/user")
+  componentDidMount(){
+    let path = this.props.location.pathname
+    axios.get(`http://localhost:8080/api${path}`)
     .then((data) => {
       this.setState({
-        usersData: data.data
+          name: data.data.name,
+          email: data.data.email,
+          location: data.data.location,
+          profilePic: data.data.profilePic
       })
-      console.log(data.data)
+      console.log(this.state)
     })
     .catch((error)=>{
       console.log(error)
@@ -35,34 +44,27 @@ class User extends Component {
 
   }
 
-      // <h1 className="nameDisplay">Hello, {name.slice(0,1).toUpperCase() + name.slice(1).toLowerCase()}</h1>
-
-
   render() {
- let show = this.state.usersData.map(({name, profilePic}, index)=>{
-    return <div className="container" key={index}>
-    <Col sm={6}>
-     <Image className="profilePic" src={profilePic} circle />
-     </Col>
-      <Col sm={6}>
 
-      </Col>
-    </div>
-
-  })
 
   return (
   <div>
+{this.state.name}
+{this.state.location}
+{this.state.profilePic}
+  <CreateLocation/>
   <div className="profileHeader">
 <Image className="profileHeaderPic" src="https://www.w3schools.com/w3css/img_forest.jpg" responsive />
 
 </div>
 
 <div style={{width: '100%', height: '400px'}} className="map"><SimpleMap/></div>
-
+ 
 
 
 <h1>Hiking Locations</h1>
+
+
 
   <Grid className="locationsInfo">
     <Row>
@@ -99,8 +101,7 @@ class User extends Component {
     </Row>
   </Grid>
 
-
-  <Button bsStyle="primary" bsSize="large" active>Add spot</Button>
+  
  </div>
 
   );

@@ -1,36 +1,53 @@
 var db = require('../models');
-var User = db.User;
-function index(req, res) { 
 
-  db.Location.find({ User_id: req.query.user_id }, function(err, locations) {
 
-    if (err) res.send(err);
-    else res.json(locations);
+function index(req, res) {
+
+  db.User.findById(req.params.users_id).populate('locations')
+    .exec(function(err, user) {
+      if (err) {
+        console.log(`school index(): err = ${err}`);
+        res.sendStatus(404);
+      }
+
+      res.json(user.spots);
+    });
+}
+
+
+function getAll(req, res) {
+  db.Location.find({}, function(err, locations) {
+    if (err) {
+      console.log(`school getallschools(): found no school in db`);
+      res.sendStatus(404);
+    }
+
+    res.json(locations);
   });
 }
 
 
-
-
 function create(req, res) {
-
-  console.log("Entering comments create()");
 
   db.Location.create(req.body, function(err, newLocation) {
     if (err) {
       console.log(`Location create() failed with err = ${err}`);
       res.sendStatus(404);
     }
-
+console.log(newLocation)
 
  db.User.findById(req.params.users_id, function(err, user) {
-  console.log(req.params.users_id)
-      if (err) {
-        console.log(`could not find ${req.params.users_id} id in db`);
-        res.sendStatus(404);
-      }
+  
+   if (err) {
+    return handleError(err);
+  }
+else{
+
+      user.spots.push(newLocation)
+      user.save()
+      res.json(newLocation)
       console.log(user)
-      
+    }
     });
 
  });
@@ -38,21 +55,24 @@ function create(req, res) {
 
 
 
-   // console.log(`new location ${newLocation} created`);
+      function destroy(req, res){
+        db.User.findById(req.params.users_id, function(err, user){
+          if(err) return handleError(err)
+          console.log(user)
+        });
+      }
 
-    //search the db for the style we want to add the new school to
 
-// models.User.findById(req.params.User_id, function(err, user){
-//   if(err) console.log(err, "did not get any id")
-//     else console.log(user)
-// })
+
    
-// let id = "59f50039d27c8c5f51a0da28"
- // user.spots.push(newLocation);
-      // console.log(user.spots)
-      // user.save();
-      // res.json(newLocation);
 
 
-// module.exports.index = index;
+
+
+
 module.exports.create = create;
+module.exports.destroy = destroy;
+module.exports.index = index;
+module.exports.getAll = getAll;
+
+

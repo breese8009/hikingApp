@@ -21,13 +21,14 @@ class SimpleMap extends Component {
   }
 
 componentDidMount(){
-  axios.get('http://localhost:8080/api/user')
+
+  axios.get('http://localhost:8080/api/location')
   .then((response)=>{
     console.log(response.data)
     this.setState({
       locations: response.data
     })
-    console.log(this.state.locations)
+    console.log(this.state.locations.lat)
     
   })
   .catch((error)=>{
@@ -36,16 +37,30 @@ componentDidMount(){
 }
 
   render() {
+let show = this.state.locations.map(({lat, long}, index)=>{
+    return <div className="container" key={index}>
+   
+  <AnyReactComponent
+            lat={{lat}}
+            lng={{long}}
+            text={<h1>hello</h1>}
+          />
+      
+    </div>
+
+  })[this.state.locations.length-1]
+
     return (
        <GoogleMapReact
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
       >
-      <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text={<h1>'hello'</h1>}
-        />
+
+      {show}
+ 
+ 
+
+      
       
     
        
