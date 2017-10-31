@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { Thumbnail } from 'react-bootstrap'
+import { Thumbnail, Grid, Row, Col } from 'react-bootstrap'
 import axios from 'axios';
+import LocationModel from '../models/Locations'
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -21,8 +22,8 @@ class SimpleMap extends Component {
   }
 
 componentDidMount(){
-
-  axios.get('http://localhost:8080/api/location')
+let path = this.props.user_id
+  axios.get(`http://localhost:8080/api${path}/location`)
   .then((response)=>{
     console.log(response.data)
     this.setState({
@@ -37,34 +38,36 @@ componentDidMount(){
 }
 
   render() {
-let show = this.state.locations.map(({lat, long}, index)=>{
-    return <div className="container" key={index}>
-   
-  <AnyReactComponent
-            lat={{lat}}
-            lng={{long}}
-            text={<h1>hello</h1>}
-          />
-      
-    </div>
 
-  })[this.state.locations.length-1]
-
+let showMap = this.state.locations.map(({lat, long, photo}, index)=>{
+  console.log(lat, long);
+  if (isNaN(parseInt(lat)) || isNaN(parseInt(long))) {
+    return;
+  } else {
+    return (<AnyReactComponent
+            lat={parseInt(lat)}
+            lng={parseInt(long)}
+            text={<h1>{photo}</h1>}
+          />)
+    }
+  })
+ console.log(showMap)
+    
     return (
+  
        <GoogleMapReact
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
       >
 
-      {show}
- 
- 
+      {showMap}
 
       
-      
-    
-       
+ 
+
       </GoogleMapReact>
+
+
     );
   }
 }

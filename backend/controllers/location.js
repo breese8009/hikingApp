@@ -42,7 +42,7 @@ console.log(newLocation)
     return handleError(err);
   }
 else{
-
+  
       user.spots.push(newLocation)
       user.save()
       res.json(newLocation)
@@ -62,7 +62,12 @@ else{
         });
       }
 
-
+function getUserLocations(req, res){
+  db.User.findById(req.params.users_id, function(err, user){
+          if(err) return handleError(err)
+          console.log(user)
+        });
+}
 
    
 
@@ -74,5 +79,6 @@ module.exports.create = create;
 module.exports.destroy = destroy;
 module.exports.index = index;
 module.exports.getAll = getAll;
+module.exports.getUserLocations = getUserLocations;
 
 

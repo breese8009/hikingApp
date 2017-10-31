@@ -1,17 +1,3 @@
-  //   componentDidMount(){
-
-  //   axios.post(`http://localhost:8080/api/user/${params.users_id}/location`)
-  //   .then((data) => {
-  //    console.log(data)
-  //   })
-  //   .catch((error)=>{
-  //     console.log(error)
-  //   })
-
-  // }
-
-
-
 import React, { Component } from 'react';
 import axios from 'axios';
 import {
@@ -19,27 +5,22 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import {FieldGroup, Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Carousel, Modal, Popover, Tooltip } from 'react-bootstrap'
-
+import {FieldGroup, Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Carousel, Modal, Popover, Tooltip, Thumbnail, Grid, Row  } from 'react-bootstrap'
+import CreateUser from './CreateUser';
+import LocationInfo from './LocationInfo';
 
 class CreateLocation extends Component {
 
-  constructor(){
+  constructor(props){
 
-    super();
-
+    super(props);
 
    this.state = {
-    city: "",
-	near_address: "",
-	description: "",
-	photo: "",
-	long: "",
-	lat: ""
+ locations: []
 
     }
 
-    // this.onFormSubmit = this.onFormSubmit.bind(this)
+    this.onFormSubmit = this.onFormSubmit.bind(this)
 
   }
 
@@ -57,14 +38,12 @@ class CreateLocation extends Component {
   }
 
 
-
   onFormSubmit(event){
     event.preventDefault()
-   console.log(this.state.name)
-
+    let path = this.props.user_id
    axios({
     method: 'post',
-    url: 'http://localhost:8080/api/user/:${params.user_id}/location',
+    url: `http://localhost:8080/api${path}/location`,
     data:{
       city: this.state.city,
       near_address: this.state.near_address,
@@ -73,26 +52,21 @@ class CreateLocation extends Component {
       long: this.state.long,
       lat: this.state.lat
     }
-   })
 
-   .then((data)=>{
-   	console.log(data)
-   })
-   .catch((error)=>{
-   	console.log("did not work", error)
-   })
+   })  
 
-
-   
   }
 
 
   render() {
     let close = () => this.setState({ show: false });
+
+
+
   return (
 
-     <span>
-     
+     <div>
+      
         <span className="modal-container" style={{ height: 200 }}>
         <Button
           bsStyle="info"
@@ -101,7 +75,7 @@ class CreateLocation extends Component {
         >
           Add location
         </Button>
- <Form onSubmit={event => this.onFormSubmit(event)}>
+
         <Modal
           show={this.state.show}
           onHide={close}
@@ -112,10 +86,13 @@ class CreateLocation extends Component {
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title">Register New Account</Modal.Title>
           </Modal.Header>
+                   <Form 
+ onSubmit={this.onFormSubmit}
+ > 
           <Modal.Body>
 
           
-            
+  
 
      <FormGroup 
  controlId="formValidationError1"
@@ -169,10 +146,11 @@ class CreateLocation extends Component {
       onChange={event => this.onInputChange(event, 'description')}
       />
     </FormGroup>
-         
+        
      
           </Modal.Body>
           <Modal.Footer>
+
           <Button 
           type="submit"
           onClick={() => this.setState({ show: false })}
@@ -180,13 +158,16 @@ class CreateLocation extends Component {
       Submit
     </Button>
             <Button onClick={close}>Close</Button>
+
           </Modal.Footer>
-          
+           </Form>
         </Modal>
-  </Form>
+  
       </span>
-       
-      </span>
+
+
+    
+      </div>
 
 
 

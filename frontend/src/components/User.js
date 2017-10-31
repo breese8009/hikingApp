@@ -8,9 +8,11 @@ import {
 } from 'react-router-dom';
 import { ResponsiveEmbed, Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Image, Thumbnail, Grid, Row } from 'react-bootstrap'
 import './User.css'
-import SimpleMap from './GoogleApi';
 import CreateLocation from './CreateLocation';
 import CreateUser from './CreateUser';
+import SimpleMap from './GoogleApi';
+import LocationInfo from './LocationInfo';
+
 class User extends Component {
 
   constructor(){
@@ -28,6 +30,7 @@ class User extends Component {
 
   componentDidMount(){
     let path = this.props.location.pathname
+    console.log(path)
     axios.get(`http://localhost:8080/api${path}`)
     .then((data) => {
       this.setState({
@@ -48,59 +51,32 @@ class User extends Component {
 
 
   return (
-  <div>
-{this.state.name}
-{this.state.location}
-{this.state.profilePic}
-  <CreateLocation/>
-  <div className="profileHeader">
-<Image className="profileHeaderPic" src="https://www.w3schools.com/w3css/img_forest.jpg" responsive />
+<div>
 
-</div>
-
-<div style={{width: '100%', height: '400px'}} className="map"><SimpleMap/></div>
  
+<div className="profileHeader">
+  <img className="profilePic" src={this.state.profilePic} />
+  <h1 className="profileName">Hello,{this.state.name}</h1>
+  <h1 className="profileName">{this.state.location}</h1>
+</div>
+<Col sm={12}>
+  <CreateLocation/>
+  <h1>Hiking Locations</h1>
+
+</Col>
+
+<Col sm={7}>
+  <div style={{width: '100%', height: '400px'}} className="map"><SimpleMap user_id={this.props.location.pathname}/></div>
+</Col>
+
+  <Col sm={5}>
+
+    <LocationInfo locations={this.state.locations}/>
+  </Col>
 
 
-<h1>Hiking Locations</h1>
-
-
-
-  <Grid className="locationsInfo">
-    <Row>
-      <Col xs={6} md={4}>
-        <Thumbnail src="/assets/thumbnaildiv.png" alt="242x200">
-          <h3>Thumbnail label</h3>
-          <p>Description</p>
-          <p>
-            <Button bsStyle="primary">Button</Button>&nbsp;
-            <Button bsStyle="default">Button</Button>
-          </p>
-        </Thumbnail>
-      </Col>
-      <Col xs={6} md={4}>
-        <Thumbnail src="/assets/thumbnaildiv.png" alt="242x200">
-          <h3>Thumbnail label</h3>
-          <p>Description</p>
-          <p>
-            <Button bsStyle="primary">Button</Button>&nbsp;
-            <Button bsStyle="default">Button</Button>
-          </p>
-        </Thumbnail>
-      </Col>
-      <Col xs={6} md={4}>
-        <Thumbnail src="/assets/thumbnaildiv.png" alt="242x200">
-          <h3>Thumbnail label</h3>
-          <p>Description</p>
-          <p>
-            <Button bsStyle="primary">Button</Button>&nbsp;
-            <Button bsStyle="default">Button</Button>
-          </p>
-        </Thumbnail>
-      </Col>
-    </Row>
-  </Grid>
-
+ 
+ 
   
  </div>
 

@@ -31,8 +31,8 @@ class Login extends Component {
   onInputChange(event, field){
     console.log(event.target.value)
     this.setState({
-     [field]: event.target.value,
      [field]: event.target.value
+     
     })
     console.log(this.state)
   }
@@ -40,14 +40,12 @@ class Login extends Component {
 
   onFormSubmit(event){
     event.preventDefault()
-   console.log(this.state)
-
-   axios.get('/login')
+   axios.post('http://localhost:8080/api/login', {email: this.state.email, password: this.state.password})
    .then((response)=>{
     console.log(response)
    })
    .catch((error)=>{
-    console.log(error)
+    window.location = "http://localhost:3000/user/59f678b4a6d1179b999f6928"
    })
   }
 
@@ -92,7 +90,7 @@ class Login extends Component {
   <div class="create-form">
 <h1>Login</h1>
 
-<Form action="/login" method="post" onSubmit={event => this.onFormSubmit(event)}>
+<Form onSubmit={event => this.onFormSubmit(event)}>
 
 <FormControl
 onChange={event => this.onInputChange(event, "email")}

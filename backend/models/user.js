@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-let Location = require('./location')
+let locationSchema = require('./location').schema;
 
 var UserSchema = new Schema({
 	name: String,
@@ -9,7 +9,7 @@ var UserSchema = new Schema({
 	password: String,
 	location: String,
 	profilePic: String,
-	spots: [{type: Schema.Types.ObjectId, ref: 'Location'}]
+	spots: [locationSchema]
 });
 
 var User = mongoose.model('Users', UserSchema);

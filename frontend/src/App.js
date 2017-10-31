@@ -4,6 +4,7 @@ import './App.css';
 import User from './components/User'
 import Login from './components/Login'
 import CreateUser from './components/CreateUser'
+import CreateLocation from './components/CreateLocation'
 import {
   BrowserRouter as Router,
   Route,
@@ -20,7 +21,7 @@ class App extends Component {
           <div>
          <Route path="/home" component={Login} />
          <Route path="/user/:user_id" component={User} />
-
+         <Route path="/user/:user_id/location"/>
           </div>
        </Router>
       </div>

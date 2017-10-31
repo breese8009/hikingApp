@@ -17,6 +17,7 @@ function create(req, res){
   });
 }
 
+
 function show(req, res) {
   console.log("Entering style show()");
 
@@ -67,6 +68,16 @@ function destroy(req, res) {
       res.json(deletedUser);
     });
 }
+
+
+
+// passport.serializeUser(function(id, done) {
+//   done(null, id)
+// })
+
+// passport.deserializeUser(function(id, done) {
+//   done(err, id);
+// })
 
 
 module.exports.index = index;
