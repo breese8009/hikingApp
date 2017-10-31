@@ -15,31 +15,15 @@ class SimpleMap extends Component {
   constructor(){
     super();
 
-    this.state = {
-      locations:[]
-    }
+  
 
   }
 
-componentDidMount(){
-let path = this.props.user_id
-  axios.get(`http://localhost:8080/api${path}/location`)
-  .then((response)=>{
-    console.log(response.data)
-    this.setState({
-      locations: response.data
-    })
-    console.log(this.state.locations.lat)
-    
-  })
-  .catch((error)=>{
-    console.log(error)
-  })
-}
+
 
   render() {
 
-let showMap = this.state.locations.map(({lat, long, photo}, index)=>{
+let showMap = this.props.locations.map(({lat, long, photo}, index)=>{
   console.log(lat, long);
   if (isNaN(parseInt(lat)) || isNaN(parseInt(long))) {
     return;
@@ -47,7 +31,7 @@ let showMap = this.state.locations.map(({lat, long, photo}, index)=>{
     return (<AnyReactComponent
             lat={parseInt(lat)}
             lng={parseInt(long)}
-            text={<h1>{photo}</h1>}
+            text={<h1>hello</h1>}
           />)
     }
   })

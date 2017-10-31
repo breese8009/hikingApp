@@ -23,12 +23,31 @@ class User extends Component {
   name: "",
   email: "",
   location: "",
-  profilePic: ""
+  profilePic: "",
+  locations: []
     }
 
   }
 
+  fetchLocations(){
+    let path = this.props.location.pathname
+    console.log("heloo", path)
+  axios.get(`http://localhost:8080/api${path}/location`)
+  .then((response)=>{
+    console.log("we're here: ", response.data)
+    this.setState({
+      locations: response.data
+    })
+    console.log(this.state.locations)
+    
+  })
+  .catch((error)=>{
+    console.log("location error: ", error)
+  })
+  }
+
   componentDidMount(){
+    this.fetchLocations();
     let path = this.props.location.pathname
     console.log(path)
     axios.get(`http://localhost:8080/api${path}`)
@@ -44,7 +63,7 @@ class User extends Component {
     .catch((error)=>{
       console.log(error)
     })
-
+      
   }
 
   render() {
@@ -66,7 +85,7 @@ class User extends Component {
 </Col>
 
 <Col sm={7}>
-  <div style={{width: '100%', height: '400px'}} className="map"><SimpleMap user_id={this.props.location.pathname}/></div>
+  <div style={{width: '100%', height: '400px'}} className="map"><SimpleMap user_id={this.props.location.pathname} locations={this.state.locations}/></div>
 </Col>
 
   <Col sm={5}>
