@@ -1,6 +1,9 @@
 var models = require('../models');
 var User = models.User;
-
+var expressValidator = require('express-validator')
+var bcrypt = require('bcrypt')
+var passport = require('passport')
+const saltRounds = 10;
 
 function index(req, res) {
   User.find({}, function(err, users) {
@@ -10,6 +13,7 @@ function index(req, res) {
 }
 
 function create(req, res){
+
 	User.create(req.body, function(err, newUser) {
     if (err) { console.log('error', err); }
     console.log(newUser);
@@ -71,13 +75,13 @@ function destroy(req, res) {
 
 
 
-// passport.serializeUser(function(id, done) {
-//   done(null, id)
-// })
+passport.serializeUser(function(id, done) {
+  done(null, id)
+})
 
-// passport.deserializeUser(function(id, done) {
-//   done(err, id);
-// })
+passport.deserializeUser(function(id, done) {
+  done(err, id);
+})
 
 
 module.exports.index = index;

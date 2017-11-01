@@ -40,12 +40,12 @@ class Login extends Component {
 
   onFormSubmit(event){
     event.preventDefault()
-   axios.post('http://localhost:8080/api/login', {email: this.state.email, password: this.state.password})
+   axios.post('http://localhost:8080/api/login')
    .then((response)=>{
     console.log(response)
    })
    .catch((error)=>{
-    window.location = "http://localhost:3000/user/59f678b4a6d1179b999f6928"
+    // window.location = "http://localhost:3000/user/59f8dc7234aea5033a6169d5"
    })
   }
 

@@ -1,6 +1,7 @@
 var db = require('../models');
 
 
+
 function index(req, res) {
 
   db.User.findById(req.params.users_id).populate('locations')
@@ -56,14 +57,27 @@ else{
 
 
       function destroy(req, res){
-        db.User.findById(req.params.users_id, function(err, user){
-          if(err) return handleError(err)
-          console.log(user)
+        db.User.findById(req.params.users_id, function(err, user){  
+        if(err) return handleError(err);
+          for(let i=0; i<user.spots.length; i++){
+            if(req.params.locations_id == user.spots[i]._id){
+                user.spots.splice(i, 1)
+                user.save()
+            } 
+          }
+
+      
         });
+
+
+
       }
 
+      
+
 function getUserLocations(req, res){
-  db.User.findById(req.params.users_id, function(err, user){
+  console.log(req.params.users_id)
+  db.Location.findById(req.params.users_id, function(err, user){
           if(err) return handleError(err)
           console.log(user)
         });

@@ -12,6 +12,7 @@ import CreateLocation from './CreateLocation';
 import CreateUser from './CreateUser';
 import SimpleMap from './GoogleApi';
 import LocationInfo from './LocationInfo';
+import Locations from './Locations'
 
 class User extends Component {
 
@@ -24,6 +25,7 @@ class User extends Component {
   email: "",
   location: "",
   profilePic: "",
+  id: "",
   locations: []
     }
 
@@ -38,7 +40,7 @@ class User extends Component {
     this.setState({
       locations: response.data
     })
-    console.log(this.state.locations)
+    
     
   })
   .catch((error)=>{
@@ -56,9 +58,11 @@ class User extends Component {
           name: data.data.name,
           email: data.data.email,
           location: data.data.location,
-          profilePic: data.data.profilePic
+          profilePic: data.data.profilePic,
+          id: data.data._id
+
       })
-      console.log(this.state)
+      
     })
     .catch((error)=>{
       console.log(error)
@@ -67,19 +71,19 @@ class User extends Component {
   }
 
   render() {
-
-
+console.log(this.state)
   return (
 <div>
 
  
 <div className="profileHeader">
   <img className="profilePic" src={this.state.profilePic} />
-  <h1 className="profileName">Hello,{this.state.name}</h1>
-  <h1 className="profileName">{this.state.location}</h1>
+  <h1 className="profileName">Welcome, {this.state.name}</h1>
+ 
+<CreateLocation user_id={this.state.id}/>
 </div>
 <Col sm={12}>
-  <CreateLocation/>
+  
   <h1>Hiking Locations</h1>
 
 </Col>
@@ -90,7 +94,7 @@ class User extends Component {
 
   <Col sm={5}>
 
-    <LocationInfo locations={this.state.locations}/>
+    <LocationInfo locations={this.state.locations} user_id={this.state.id}/>
   </Col>
 
 

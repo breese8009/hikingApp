@@ -39,11 +39,13 @@ class CreateLocation extends Component {
 
 
   onFormSubmit(event){
+  
     event.preventDefault()
     let path = this.props.user_id
+console.log(this.props)
    axios({
     method: 'post',
-    url: `http://localhost:8080/api${path}/location`,
+    url: `http://localhost:8080/api/user/${path}/location`,
     data:{
       city: this.state.city,
       near_address: this.state.near_address,
@@ -55,22 +57,21 @@ class CreateLocation extends Component {
 
    })  
 
+
   }
 
 
   render() {
     let close = () => this.setState({ show: false });
-
-
-
   return (
 
      <div>
       
         <span className="modal-container" style={{ height: 200 }}>
         <Button
+          className="btn"
           bsStyle="info"
-          bsSize="small"
+          bsSize="large"
           onClick={() => this.setState({ show: true })}
         >
           Add location
@@ -107,7 +108,7 @@ class CreateLocation extends Component {
 
 
     <FormGroup>
-      <ControlLabel>near address</ControlLabel>
+      <ControlLabel>Difficulity level (1-10)</ControlLabel>
       <FormControl 
       type="address" 
       onChange={event => this.onInputChange(event, 'near_address')}

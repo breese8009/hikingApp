@@ -15,11 +15,12 @@ class LocationInfo extends Component {
 
 
   render() {
-    console.log("What do we have?", this.props)
+    console.log("What do we have?", this.props.user_id)
     let showLocations= this.props.locations.map((location)=>{
         return (
           <Locations
           location={location}
+          user_id={this.props.user_id}
           />
           )
     })

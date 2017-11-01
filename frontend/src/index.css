@@ -3,17 +3,20 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-.imgMaker {
-	width:20px;
-}
-.imgMaker:hover {
-	width:100px;
-}
+
 
 .locationsInfo {
 	margin-top:100px;
 }
 
 .profileName {
-	color:yellow;
+	color:black;
+}
+
+.mapImg{
+	width:20px;
+}
+
+.mapImg:hover{
+	width:100px;
 }

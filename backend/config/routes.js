@@ -53,7 +53,7 @@ router.delete('/api/user/:users_id', userController.destroy);
 
 // router.get('/api/location', locationController.index);
 router.post('/api/user/:users_id/location', locationController.create);
-router.delete('/api/user/:users_id/location', locationController.destroy);
+router.delete('/api/user/:users_id/location/:locations_id', locationController.destroy);
 router.get('/api/user/:users_id/location', locationController.index);
 router.get('/api/location', locationController.getAll);
 
