@@ -16,9 +16,9 @@ class Navbars extends Component {
 
     super();
 
-    this.state = {
-     usersData:[]
-    }
+    // this.state = {
+    //  usersData:[]
+    // }
 
     
 

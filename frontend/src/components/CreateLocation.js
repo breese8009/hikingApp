@@ -17,11 +17,9 @@ class CreateLocation extends Component {
 
    this.state = {
  locations: []
-
     }
 
     this.onFormSubmit = this.onFormSubmit.bind(this)
-
   }
 
   getInitialState() {
@@ -57,12 +55,30 @@ console.log(this.props)
 
    })  
 
-
   }
+
+  getGeoLocation(){
+    let lat="";
+    let long="";
+       if ("geolocation" in navigator) {
+     navigator.geolocation.getCurrentPosition( function(position) {
+       lat = String(position.coords.latitude)
+       long = String(position.coords.longitude)
+      
+     });
+      
+   }else{
+    console.log("no geolocation in browser")
+   }
+   console.log(lat)
+  }
+
+
 
 
   render() {
     let close = () => this.setState({ show: false });
+    console.log(this.state)
   return (
 
      <div>
@@ -98,7 +114,7 @@ console.log(this.props)
      <FormGroup 
  controlId="formValidationError1"
  >
-      <ControlLabel>city</ControlLabel>
+      <ControlLabel>City</ControlLabel>
       <FormControl 
       type="text" 
       onChange={event => this.onInputChange(event, 'city')}
@@ -116,7 +132,7 @@ console.log(this.props)
     </FormGroup>
 
     <FormGroup>
-      <ControlLabel>photo</ControlLabel>
+      <ControlLabel>Photo</ControlLabel>
       <FormControl 
       type="text" 
       onChange={event => this.onInputChange(event, 'photo')}
@@ -124,7 +140,7 @@ console.log(this.props)
     </FormGroup>
 
        <FormGroup>
-      <ControlLabel>Long</ControlLabel>
+      <ControlLabel>Longitude</ControlLabel>
       <FormControl 
       type="text" 
       onChange={event => this.onInputChange(event, 'long')}
@@ -132,7 +148,7 @@ console.log(this.props)
     </FormGroup>
 
        <FormGroup>
-      <ControlLabel>Lat</ControlLabel>
+      <ControlLabel>Latitude</ControlLabel>
       <FormControl 
       type="text" 
       onChange={event => this.onInputChange(event, 'lat')}
@@ -141,7 +157,7 @@ console.log(this.props)
 
 
      <FormGroup>
-      <ControlLabel>description</ControlLabel>
+      <ControlLabel>Description</ControlLabel>
       <FormControl 
       type="text" 
       onChange={event => this.onInputChange(event, 'description')}
@@ -159,7 +175,10 @@ console.log(this.props)
       Submit
     </Button>
             <Button onClick={close}>Close</Button>
-
+            <Button
+            bsStyle="info"
+            onClick={this.getGeoLocation()}
+            >Current location</Button>
           </Modal.Footer>
            </Form>
         </Modal>

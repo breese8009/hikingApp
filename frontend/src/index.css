@@ -20,3 +20,7 @@ body {
 .mapImg:hover{
 	width:100px;
 }
+
+.locationsInfo {
+	margin-top:0px;
+}

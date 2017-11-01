@@ -12,7 +12,8 @@ import CreateLocation from './CreateLocation';
 import CreateUser from './CreateUser';
 import SimpleMap from './GoogleApi';
 import LocationInfo from './LocationInfo';
-import Locations from './Locations'
+import Locations from './Locations';
+import Navbar from './Navbar';
 
 class User extends Component {
 

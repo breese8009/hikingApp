@@ -14,9 +14,8 @@ class SimpleMap extends Component {
   constructor(){
     super();
 
-  
-
   }
+  
  
 
 
