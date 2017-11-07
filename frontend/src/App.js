@@ -23,6 +23,7 @@ class App extends Component {
          <Route path="/home" component={Login} />
          <Route path="/user/:user_id" component={User} />
          <Route path="/user/:user_id/location"/>
+             <Route path="/user/:user_id/location/:locations_id"/>
           </div>
        </Router>
       </div>

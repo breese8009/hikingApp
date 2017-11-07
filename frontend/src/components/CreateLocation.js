@@ -9,6 +9,7 @@ import {FieldGroup, Button, FormGroup, FormControl, ControlLabel, HelpBlock, For
 import CreateUser from './CreateUser';
 import LocationInfo from './LocationInfo';
 
+
 class CreateLocation extends Component {
 
   constructor(props){
@@ -17,9 +18,11 @@ class CreateLocation extends Component {
 
    this.state = {
  locations: []
+
     }
 
     this.onFormSubmit = this.onFormSubmit.bind(this)
+    this.getGeoLocation = this.getGeoLocation.bind(this)
   }
 
   getInitialState() {
@@ -31,16 +34,25 @@ class CreateLocation extends Component {
         this.setState({
            [field]: event.target.value,
         }, () => {
-          console.log(this.state);
+         
         })
   }
 
 
+  getGeoLocation(){
+navigator.geolocation.getCurrentPosition((position)=> {
+  this.setState({
+    long: position.coords.longitude,
+    lat: position.coords.latitude
+   })
+  })
+}
+
+
   onFormSubmit(event){
-  
     event.preventDefault()
     let path = this.props.user_id
-console.log(this.props)
+
    axios({
     method: 'post',
     url: `http://localhost:8080/api/user/${path}/location`,
@@ -55,30 +67,13 @@ console.log(this.props)
 
    })  
 
-  }
-
-  getGeoLocation(){
-    let lat="";
-    let long="";
-       if ("geolocation" in navigator) {
-     navigator.geolocation.getCurrentPosition( function(position) {
-       lat = String(position.coords.latitude)
-       long = String(position.coords.longitude)
-      
-     });
-      
-   }else{
-    console.log("no geolocation in browser")
-   }
-   console.log(lat)
-  }
-
+  } 
 
 
 
   render() {
     let close = () => this.setState({ show: false });
-    console.log(this.state)
+  console.log(this.state)
   return (
 
      <div>
@@ -144,6 +139,7 @@ console.log(this.props)
       <FormControl 
       type="text" 
       onChange={event => this.onInputChange(event, 'long')}
+      value={this.state.long}
       />
     </FormGroup>
 
@@ -152,6 +148,7 @@ console.log(this.props)
       <FormControl 
       type="text" 
       onChange={event => this.onInputChange(event, 'lat')}
+      value={this.state.lat}
       />
     </FormGroup>
 
@@ -177,13 +174,14 @@ console.log(this.props)
             <Button onClick={close}>Close</Button>
             <Button
             bsStyle="info"
-            onClick={this.getGeoLocation()}
+            onClick={event => this.getGeoLocation(event)}
             >Current location</Button>
           </Modal.Footer>
            </Form>
         </Modal>
   
       </span>
+
 
 
     

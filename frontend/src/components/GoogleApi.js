@@ -15,20 +15,20 @@ class SimpleMap extends Component {
     super();
 
   }
-  
+
  
 
 
   render() {
-
+console.log(this.props)
 let showMap = this.props.locations.map(({lat, long, photo}, index)=>{
   console.log(lat, long);
   if (isNaN(parseInt(lat)) || isNaN(parseInt(long))) {
     return "";
   } else {
     return (<AnyReactComponent
-            lng={parseInt(long)}
-            lat={parseInt(lat)}
+            lng={parseFloat(long)}
+            lat={parseFloat(lat)}
             text={<img className="mapImg" src={photo}/>}
           />)
     }

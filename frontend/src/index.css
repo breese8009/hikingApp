@@ -24,3 +24,13 @@ body {
 .locationsInfo {
 	margin-top:0px;
 }
+
+.editInputOff {
+	display:none;
+	
+}
+.editInputOn {
+	display:block;
+	
+
+}

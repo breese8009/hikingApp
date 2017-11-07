@@ -73,26 +73,36 @@ else{
 
       }
 
-      
 
-function getUserLocations(req, res){
-  console.log(req.params.users_id)
-  db.Location.findById(req.params.users_id, function(err, user){
-          if(err) return handleError(err)
-          console.log(user)
-        });
+
+function update(req, res){
+db.User.findById(req.params.users_id, function (err, user) {
+  if (err) return handleError(err);
+  else{
+    for(let i = 0; i < user.spots.length; i++){
+      if(user.spots[i]._id == req.params.locations_id){
+        console.log(user.spots[i])
+        user.spots[i].city = req.body.city
+        user.spots[i].near_address = req.body.near_address
+        user.spots[i].description = req.body.description
+        user.spots[i].photo = req.body.photo
+
+        user.save()
+       
+      } else{
+        console.log(`there is no such id ${user.spots[i]._id}`)
+      }
+      
+    }
+}
+});
 }
 
-   
-
-
-
-
-
+      
 module.exports.create = create;
 module.exports.destroy = destroy;
 module.exports.index = index;
 module.exports.getAll = getAll;
-module.exports.getUserLocations = getUserLocations;
+module.exports.update = update;
 
 
