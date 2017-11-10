@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@okta/okta-signin-widget": "^2.3.0",
     "axios": "^0.17.0",
+    "backbone-react-component": "^1.0.0",
     "google-map-react": "^0.25.0",
     "google-maps-react": "^1.1.0",
     "passport-http": "^0.3.0",

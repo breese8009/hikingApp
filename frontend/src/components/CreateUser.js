@@ -47,8 +47,7 @@ class CreateUser extends Component {
 
   onFormSubmit(event){
     event.preventDefault()
-   console.log(this.state.name)
-
+    console.log(this.state.location)
    axios({
     method: 'post',
     url: 'http://localhost:8080/api/user',
@@ -61,6 +60,7 @@ class CreateUser extends Component {
 
     }
    })
+   console.log(this.state)
   }
 
 
@@ -84,7 +84,9 @@ class CreateUser extends Component {
           container={this}
           aria-labelledby="contained-modal-title"
         >
-        <Form onSubmit={event => this.onFormSubmit(event)}>
+        <Form 
+        onSubmit={event => this.onFormSubmit(event)}
+        >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title">Register New Account</Modal.Title>
           </Modal.Header>

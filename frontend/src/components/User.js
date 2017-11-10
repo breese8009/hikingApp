@@ -76,7 +76,7 @@ console.log(this.state)
   return (
 <div>
 
- 
+ <Navbar/>
 <div className="profileHeader">
   <img className="profilePic" src={this.state.profilePic} />
   <h1 className="profileName">Welcome, {this.state.name}</h1>

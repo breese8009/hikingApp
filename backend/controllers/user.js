@@ -1,9 +1,13 @@
 var models = require('../models');
 var User = models.User;
-// var expressValidator = require('express-validator')
-// var bcrypt = require('bcrypt')
-// var passport = require('passport')
-// const saltRounds = 10;
+var expressValidator = require('express-validator')
+var bcrypt = require('bcrypt')
+var passport = require('passport')
+const saltRounds = 10;
+
+
+var Strategy = require('passport-http').BasicStrategy;
+var LocalStrategy = require('passport-local').Strategy;
 
 function index(req, res) {
   User.find({}, function(err, users) {
@@ -11,6 +15,10 @@ function index(req, res) {
     else res.json(users);
   });
 }
+
+
+
+
 
 function create(req, res){
 
@@ -20,6 +28,33 @@ function create(req, res){
     res.json(newUser);
   });
 }
+
+function getUser(req, res){
+ 
+  User.findOne({email:req.body.email}, function(err, user){
+    if(err) throw err;
+    else 
+      console.log(user)
+  })
+}
+
+
+// function create(req, res){
+// bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+//   User.create({
+//     email: req.body.email, password: hash, location: req.body.location, profilePic: req.body.profilePic, name: req.body.name},
+//      function(err, newUser) {
+//     if (err) { console.log('error', err); }
+//     else{
+//     res.json(newUser)
+// }
+// });
+
+// });
+
+  
+// }
+
 
 
 function show(req, res) {
@@ -75,13 +110,15 @@ function destroy(req, res) {
 
 
 
-// passport.serializeUser(function(id, done) {
-//   done(null, id)
-// })
 
-// passport.deserializeUser(function(id, done) {
-//   done(err, id);
-// })
+
+passport.serializeUser(function(id, done) {
+  done(null, id)
+})
+
+passport.deserializeUser(function(id, done) {
+  done(err, id);
+})
 
 
 module.exports.index = index;
@@ -89,6 +126,8 @@ module.exports.create = create;
 module.exports.show = show;
 module.exports.update = update;
 module.exports.destroy = destroy;
+module.exports.getUser = getUser;
+
 
 
 

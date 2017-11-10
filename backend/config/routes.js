@@ -19,24 +19,53 @@ var LocalStrategy = require('passport-local').Strategy;
 // after authentication.
 
 
-passport.use(new Strategy({ qop: 'auth' },
-  function(email, password, done) {
-      User.findOne({ email: email }, function(err, user) {
 
-      if (err) { 
-        return done(err); 
-      }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (user.password !== password) {
-        return done(null, false, { message: 'Incorrect password.' });
-      } 
-      return done(null, user);
-    });
+
+// passport.use(new Strategy({ usernameField: "email"},
+//   function(email, password, done) {
+//     console.log("got here")
+
+//       User.findOne({ email: email }, function(err, user) {
+
+//       if (err) { 
+//         return done(err); 
+//       }
+//       if (!user) {
+//         return done(null, false, { message: 'Incorrect username.' });
+//       }
+//       if (user.password !== password) {
+//         return done(null, false, { message: 'Incorrect password.' });
+//       } 
+//       console.log(user)
+//       return done(null, user);
+//     });
+//   } 
+// ))
+
+
+
+
+
+passport.use(new LocalStrategy({ usernameField: "email"},
+  
+  function(email, password, done) {
+    console.log(password)
+      User.findOne({ email: email }, function(err, user) {
+        console.log("got here", user)
+        if (err) { return done(err); }
+        if (!user) {
+          return done(null, false, { message: 'Unknown user' });
+        }
+        if (password !== user.password) {
+          return done(null, false, { message: 'Invalid password' });
+        }
+        console.log('I just wanna see foo! '); // this fails!
+        return done(null, user);
+
+      });
   } 
 ))
-// http://localhost:8080/api/user/59f6824c42cdb69de3e1140d
+
 
 // passport.authenticate('basic', { session: false })
 
@@ -44,9 +73,7 @@ passport.use(new Strategy({ qop: 'auth' },
 //user routes
 router.post('/api/user', userController.create);
 router.get('/api/user', userController.index);
-router.get('/api/user/:users_id', passport.authenticate('basic', { session: false }), userController.show);
-// router.put('/api/user/:users_id', userController.update);
-
+router.get('/api/user/:users_id', userController.show);
 router.delete('/api/user/:users_id', userController.destroy);
 
 
@@ -60,6 +87,18 @@ router.delete('/api/user/:users_id/location/:locations_id', locationController.d
 router.get('/api/user/:users_id/location', locationController.index);
 router.get('/api/location', locationController.getAll);
 router.put('/api/user/:users_id/location/:locations_id', locationController.update);
+
+
+
+// router.post('/api/login', passport.authenticate('basic', { session: false }))
+  router.post('/api/login', function(req, res, next) {
+    passport.authenticate('local', {session:false}, function(err, user) {
+      if (err) { return next(err) }
+      res.json({email: req.body.email, password: req.body.password});
+   })(req, res, next);
+
+  });
+
 
 
 

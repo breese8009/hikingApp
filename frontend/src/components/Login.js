@@ -40,13 +40,33 @@ class Login extends Component {
 
   onFormSubmit(event){
     event.preventDefault()
-   axios.post('http://localhost:8080/api/login')
-   .then((response)=>{
-    console.log(response)
+    axios({
+    method: 'post',
+    url: 'http://localhost:8080/api/login',
+    data:{
+      email: this.state.email,
+      password: this.state.password
+
+    }
    })
-   .catch((error)=>{
-    // window.location = "http://localhost:3000/user/59f8dc7234aea5033a6169d5"
-   })
+    .then((response)=>{
+      
+      axios.get('http://localhost:8080/api/user')
+        .then((res)=>{
+          console.log(response.data.email)
+          let id = res.data.filter((data)=>{return data.email===response.data.email && data.password === response.data.password})[0]._id
+          console.log(id)
+          window.location = `http://localhost:3000/user/${id}`
+          
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+    console.log(this.state)
   }
 
 
@@ -90,7 +110,10 @@ class Login extends Component {
   <div class="create-form">
 <h1>Login</h1>
 
-<Form onSubmit={event => this.onFormSubmit(event)}>
+<Form 
+onSubmit={event => this.onFormSubmit(event)}
+type="submit"
+>
 
 <FormControl
 onChange={event => this.onInputChange(event, "email")}
