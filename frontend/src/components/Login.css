@@ -25,7 +25,11 @@
        background-color: white;
      border-radius: 44px;
      margin-bottom:100px;
+     background-color: black;
+     opacity:0.85;
     }
+
+    
 
     .loginBtn {
       margin-top:10px;
@@ -37,6 +41,10 @@
       height:50px;
       margin-top:10px;
 
+    }
+
+    .caption-header{
+      font-size: 100px;
     }
 
    

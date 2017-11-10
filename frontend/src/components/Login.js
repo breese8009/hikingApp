@@ -83,31 +83,9 @@ class Login extends Component {
 
  <Carousel className="carousel">
     <Carousel.Item>
-      <img width={900} height={500} alt="900x500" src="https://www.w3schools.com/css/trolltunga.jpg" />
+      <img width={900} height={500} alt="900x500" src="http://www.newsmobile.in/wp-content/uploads/2016/12/5f5cad27e4b05cdab7ea78dcea0db448.jpg" />
       <Carousel.Caption>
-        <h3>First slide label</h3>
-        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </Carousel.Caption>
-    </Carousel.Item>
-    <Carousel.Item>
-      <img width={900} height={500} alt="900x500" src="https://www.w3schools.com/css/trolltunga.jpg" />
-      <Carousel.Caption>
-        <h3>Second slide label</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </Carousel.Caption>
-    </Carousel.Item>
-    <Carousel.Item>
-      <img width={900} height={500} alt="900x500" src="https://www.w3schools.com/css/trolltunga.jpg" />
-      <Carousel.Caption>
-        <h3>Third slide label</h3>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-      </Carousel.Caption>
-    </Carousel.Item>
-  </Carousel>
-
-
-
-  <div class="create-form">
+      <div  className="carousel-login create-form">
 <h1>Login</h1>
 
 <Form 
@@ -142,6 +120,16 @@ bsSize="large"
 </Form>
 <p>Don't have an account?<CreateUser/></p>
   </div>
+        <h1 className="caption-header">Hiker-X</h1>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </Carousel.Caption>
+    </Carousel.Item>
+   
+  </Carousel>
+
+
+
+  
   </div>
 
   );
