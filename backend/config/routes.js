@@ -21,30 +21,6 @@ var LocalStrategy = require('passport-local').Strategy;
 
 
 
-// passport.use(new Strategy({ usernameField: "email"},
-//   function(email, password, done) {
-//     console.log("got here")
-
-//       User.findOne({ email: email }, function(err, user) {
-
-//       if (err) { 
-//         return done(err); 
-//       }
-//       if (!user) {
-//         return done(null, false, { message: 'Incorrect username.' });
-//       }
-//       if (user.password !== password) {
-//         return done(null, false, { message: 'Incorrect password.' });
-//       } 
-//       console.log(user)
-//       return done(null, user);
-//     });
-//   } 
-// ))
-
-
-
-
 
 passport.use(new LocalStrategy({ usernameField: "email"},
   
@@ -89,8 +65,6 @@ router.get('/api/location', locationController.getAll);
 router.put('/api/user/:users_id/location/:locations_id', locationController.update);
 
 
-
-// router.post('/api/login', passport.authenticate('basic', { session: false }))
   router.post('/api/login', function(req, res, next) {
     passport.authenticate('local', {session:false}, function(err, user) {
       if (err) { return next(err) }

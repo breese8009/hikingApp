@@ -67,7 +67,7 @@ handleChangeInput(event, field){
 
   render(){
     let className = this.state.clicked ? 'editInputOn' : 'editInputOff';
-   
+
     return(
 <div> 
 

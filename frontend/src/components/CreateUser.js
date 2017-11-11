@@ -97,41 +97,46 @@ class CreateUser extends Component {
  <FormGroup 
  controlId="formValidationError1"
  >
-      <ControlLabel>Name</ControlLabel>
+      <ControlLabel className="register-label">Name</ControlLabel>
       <FormControl 
       type="text" 
+      placeholder="name"
       onChange={event => this.onInputChange(event, 'name')}
       />
     </FormGroup>
 
     <FormGroup>
-      <ControlLabel>Email</ControlLabel>
+      <ControlLabel className="register-label">Email</ControlLabel>
       <FormControl 
       type="email" 
+      placeholder="email"
       onChange={event => this.onInputChange(event, 'email')}
       />
     </FormGroup>
 
     <FormGroup>
-      <ControlLabel>Password</ControlLabel>
+      <ControlLabel className="register-label">Password</ControlLabel>
       <FormControl 
       type="password" 
+      placeholder="password"
       onChange={event => this.onInputChange(event, 'password')}
       />
     </FormGroup>
 
        <FormGroup>
-      <ControlLabel>Location</ControlLabel>
+      <ControlLabel className="register-label">Location</ControlLabel>
       <FormControl 
       type="text" 
+      placeholder="location"
       onChange={event => this.onInputChange(event, 'location')}
       />
     </FormGroup>
 
        <FormGroup>
-      <ControlLabel>Profile picture</ControlLabel>
+      <ControlLabel className="register-label">Profile picture</ControlLabel>
       <FormControl 
       type="text" 
+      placeholder="profile picture"
       onChange={event => this.onInputChange(event, 'profilePic')}
       />
     </FormGroup>

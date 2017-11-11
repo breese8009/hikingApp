@@ -34,9 +34,36 @@ body {
 	
 
 }
+
+.register-label {
+	font-size:20px;
+}
+
 footer{
 	width: 100%;
 	height:40px;
 	background-color: blue;
+}
+
+.profilePic {
+	width:150px;
+	border:3px black solid;
+	margin-left:0px;
+}
+
+.profileHeaderPic {
+	width: 100vw;
+	height:250px;
+	position:absolute;
+
+
+}
+.profileHeader {
+	width: 100vw;
+	position:relative;
+	padding-bottom:250px;
+	background-size:cover;
+	background-image: url("https://az616578.vo.msecnd.net/files/2016/08/13/636066600346746625-391928930_couple-hiking-valley.jpg")
+
 }
 
