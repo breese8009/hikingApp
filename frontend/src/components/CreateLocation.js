@@ -66,7 +66,7 @@ navigator.geolocation.getCurrentPosition((position)=> {
     }
 
    })  
-
+   window.location = `http://localhost:3000/user/${path}`
   } 
 
 
