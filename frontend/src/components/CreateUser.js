@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 import {FieldGroup, Button, FormGroup, FormControl, ControlLabel, HelpBlock, Form, Col, Checkbox, Carousel, Modal, Popover, Tooltip } from 'react-bootstrap'
 
-
 class CreateUser extends Component {
 
   constructor(){

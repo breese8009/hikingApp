@@ -5,7 +5,7 @@ var hikerRouter = require('./config/routes.js');
 var session = require('express-session')
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan')
-
+var expressValidator = require('express-validator')
 
 
 
@@ -33,7 +33,7 @@ app.use(function(req, res, next) {
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
-
+app.use(expressValidator())
 app.use(hikerRouter);
 
 

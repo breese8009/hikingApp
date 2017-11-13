@@ -71,6 +71,11 @@ class User extends Component {
       
   }
 
+
+ 
+
+
+
   render() {
 console.log(this.state)
   return (
@@ -86,6 +91,7 @@ console.log(this.state)
 <Col sm={12}>
   
   <h1>Hiking Locations</h1>
+ 
 
 </Col>
 
@@ -94,7 +100,7 @@ console.log(this.state)
 </Col>
 
   <Col sm={5}>
-
+    
     <LocationInfo locations={this.state.locations} user_id={this.state.id}/>
   </Col>
 

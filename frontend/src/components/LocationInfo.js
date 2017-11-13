@@ -11,21 +11,47 @@ import Locations from './Locations'
 
 class LocationInfo extends Component {
 
+  constructor(){
+    super();
+   this.state = {
+    search: ""
+   }
+
+   this.updateSearch = this.updateSearch.bind(this)
+  }
+
+
+ updateSearch(event){
+    console.log(event.target.value)
+    this.setState({
+      search: event.target.value.substr(0,20)
+    })
+  
+  }
 
 
 
   render() {
-    console.log("What do we have?", this.props.user_id)
-    let showLocations= this.props.locations.map((location)=>{
+    let filteredLocations = this.props.locations.filter((location)=>{
+      return location.city.indexOf(this.state.search) !== -1
+    });
+console.log(filteredLocations)
+    let showLocations= filteredLocations.map((location)=>{
         return (
+
           <Locations
           location={location}
           user_id={this.props.user_id}
           />
+          
           )
     })
   return (
 <div>
+      <div>
+  <input onChange={event => this.updateSearch(event)} value={this.state.search} type="search"/>
+  <button>search</button>
+</div>
 {showLocations}
 </div>
 

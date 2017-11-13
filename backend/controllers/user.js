@@ -4,10 +4,12 @@ var expressValidator = require('express-validator')
 var bcrypt = require('bcrypt')
 var passport = require('passport')
 const saltRounds = 10;
-
-
 var Strategy = require('passport-http').BasicStrategy;
 var LocalStrategy = require('passport-local').Strategy;
+
+
+
+
 
 function index(req, res) {
   User.find({}, function(err, users) {
@@ -22,12 +24,30 @@ function index(req, res) {
 
 function create(req, res){
 
-	User.create(req.body, function(err, newUser) {
+User.findOne({email: req.body.email}, function(err, foundUser){
+  if(err){
+    throw err;
+  } else if(foundUser === null){
+
+User.create(req.body, function(err, newUser) {
     if (err) { console.log('error', err); }
     console.log(newUser);
     res.json(newUser);
   });
+
+  }
+
+  else{
+    console.log(`${foundUser} is already in use, please try again`)
+    return;
+  }
+})
+
+
 }
+
+
+
 
 function getUser(req, res){
  
